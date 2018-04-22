@@ -1,2 +1,4 @@
 # tissue_crepidula
-data analysis for RNAseq experiment
+
+Data analysis for RNAseq experiment on tissues of Crepidula fornicata
+
