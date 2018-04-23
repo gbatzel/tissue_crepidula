@@ -44,17 +44,15 @@ names(y1)
 plotBCV(y1)
 
 ## GLM estimates of dispersion
-
 design.mat <- model.matrix(~ 0 + y$samples$group)
 colnames(design.mat) <- levels(y$samples$group)
 y2 <- estimateGLMCommonDisp(y,design.mat)
 y2 <- estimateGLMTrendedDisp(y2,design.mat, method="power")
-# You can change method to "auto", "bin.spline", "power", "spline", "bin.loess".
-# The default is "auto" which chooses "bin.spline" when > 200 tags and "power" otherwise.
 y2 <- estimateGLMTagwiseDisp(y2,design.mat)
 plotBCV(y2)
 
-# differential expression
+
+# Differential expression
 et21 <- exactTest(y1, pair=c(2,1)) # compare groups 2 and 1: gill vs foot
 et31 <- exactTest(y1, pair=c(3,1)) # compare groups 3 and 1: head vs foot
 et32 <- exactTest(y1, pair=c(3,2)) # compare groups 3 and 2: head vs gill
@@ -141,4 +139,9 @@ keep32 <- out32$table$FDR <= 0.001
 gene_list_32 <- out32[keep32,]
 
 #Save to file
-#write.table(gene_list_32, file="gene_list_32_test.txt")
+write.table(gene_list_32, file="32_diffex.txt")
+write.table(gene_list_31, file="31_diffex.txt")
+write.table(gene_list_21, file="21_diffex.txt")
+write.table(gene_list_43, file="43_diffex.txt")
+write.table(gene_list_42, file="42_diffex.txt")
+write.table(gene_list_41, file="41_diffex.txt")
